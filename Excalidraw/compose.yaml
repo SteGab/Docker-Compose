@@ -1,0 +1,10 @@
+name: Excalidraw
+services:
+    excalidraw:
+        #stdin_open: true
+        tty: true
+        container_name: excalidraw
+        ports:
+            - 9001:80
+        image: excalidraw/excalidraw:latest
+        
