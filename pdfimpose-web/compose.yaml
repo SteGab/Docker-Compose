@@ -1,0 +1,7 @@
+name: pdfimpose-web
+services:
+    impose-web:
+        container_name: impose-web
+        ports:
+            - 9005:5000
+        image: impose-web
