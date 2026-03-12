@@ -11,4 +11,33 @@ Die Website [Composerize](https://www.composerize.com/) stellt einen Converter b
 # Weitere Applikationen
 
 
-## TBD
+## PDF-Tools
+
+Der Container stellt ein Linux mit Postscript und PDF Tools bereit.
+
+### Image erstellen
+
+```
+# from pdf-tools dir
+podman build -t pdf-test .
+```
+
+### Start
+
+```
+podman run -dt -v <host-dir>:<container-dir> --name <container-name> pdf-tools:latest
+
+# Beispiel
+
+podman run -dt -v D:\99_TNT\:/opt/data --name pdf-tools2 pdf-tools:latest
+```
+
+### Aufruf
+
+```
+podman exec -it pdf-tools <Command>
+
+# Beispiel Starte bash
+
+podman exec -it pdf-tools bash
+```
