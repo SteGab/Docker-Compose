@@ -14,6 +14,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pip \
     man \
     curl \
-    wget
+    wget \
+    ghostscript \
+    texlive \
+    asciidoctor \
+    pandock \
+    groff
+
 
 ENTRYPOINT ["bash"]
