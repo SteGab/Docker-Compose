@@ -1,0 +1,25 @@
+
+name: traefik
+services:
+  traefik:
+    image: "traefik:v3.6.2"
+    container_name: "traefik"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - traefik_default
+    command:
+      - "--providers.docker=true"
+      #- "--providers.docker.exposedbydefault=false"
+      #- "--providers.docker.network=traefik_default"
+      #- "--entryPoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/run/user/1000/podman/podman.sock:/var/run/docker.sock:ro"
+
+networks:
+  traefik_default :
+    name: traefik_default 

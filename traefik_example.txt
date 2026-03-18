@@ -1,0 +1,2 @@
+podman run -d --network=traefik_default -p 80:80 -v /run/user/1000/podman/podman.sock:/var/run/docker.sock:ro traefik:v3.6.2 --providers.podman
+podman run -d --network=traefik_default --label 'traefik.http.routers.nginx.rule=Host(`nginx.localhost`)' nginx:1.29.3
