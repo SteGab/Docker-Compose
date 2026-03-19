@@ -1,0 +1,26 @@
+name: focalboard
+services:
+  focalboard:
+    ports:
+      - 9004:8000
+    restart: unless-stopped
+    container_name: focalboard
+    image: mattermost/focalboard
+    labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.focalboard.rule=Host(\"focalboard.localhost\")"
+            - "traefik.http.routers.focalboard.entrypoints=web"
+    networks:
+        - traefik_default
+    volumes:
+      - fbdata:/opt/focalboard/data
+
+networks:
+  traefik_default :
+    name: traefik_default
+    external: true
+
+volumes:
+    fbdata:
+        external: true
+        name: fbdata
