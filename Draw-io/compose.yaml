@@ -7,3 +7,13 @@ services:
         ports:
             - 9002:8080
         image: jgraph/drawio
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.drawio.rule=Host(\"drawio.localhost\")"
+            - "traefik.http.routers.drawio.entrypoints=web"
+        networks:
+            - traefik_default
+networks:
+  traefik_default :
+    name: traefik_default
+    external: true

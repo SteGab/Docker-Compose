@@ -5,3 +5,13 @@ services:
         ports:
             - 9005:5000
         image: impose-web
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.impose-web.rule=Host(\"pdfimpose.localhost\")"
+            - "traefik.http.routers.impose-web.entrypoints=web"
+        networks:
+            - traefik_default
+networks:
+  traefik_default :
+    name: traefik_default
+    external: true

@@ -7,4 +7,13 @@ services:
         ports:
             - 9001:80
         image: excalidraw/excalidraw:latest
-        
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.excalidraw.rule=Host(\"excalidraw.localhost\")"
+            - "traefik.http.routers.excalidraw.entrypoints=web"
+        networks:
+            - traefik_default
+networks:
+  traefik_default :
+    name: traefik_default
+    external: true

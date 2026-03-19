@@ -2,7 +2,7 @@
 name: traefik
 services:
   traefik:
-    image: "traefik:v3.6.2"
+    image: "traefik:latest"
     container_name: "traefik"
     restart: unless-stopped
     security_opt:
@@ -11,14 +11,19 @@ services:
       - traefik_default
     command:
       - "--providers.docker=true"
-      #- "--providers.docker.exposedbydefault=false"
-      #- "--providers.docker.network=traefik_default"
-      #- "--entryPoints.web.address=:80"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=traefik_default"
+      - "--entryPoints.web.address=:8090"
+      - "--entryPoints.websecure.address=:9443"
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
     ports:
-      - "80:80"
-      - "8080:8080"
+      - "8090:8090"
+      - "9443:9443"
+      - "8088:8080"
     volumes:
-      - "/run/user/1000/podman/podman.sock:/var/run/docker.sock:ro"
+      - "/var/run/podman/podman.sock:/var/run/docker.sock" #Needed for rootfull podman
+
 
 networks:
   traefik_default :

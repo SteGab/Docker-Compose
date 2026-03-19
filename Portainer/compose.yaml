@@ -1,9 +1,9 @@
 # named volume 'portainer_data' is marked as "external" (used by service 'portainer-ce'), so either remove "external" from volume definition or it needs to be created using: docker volume create portainer_data
 name: Portainer CE
 services:
-    portainer-ce:
+    portainer:
         ports:
-            - 8000:8000
+            - 9000:9000
             - 9443:9443
         container_name: portainer
         restart: unless-stopped
@@ -12,6 +12,17 @@ services:
             - /run/podman/podman.sock:/var/run/docker.sock
             - portainer_data:/data
         image: portainer/portainer-ce:lts
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.portainer.rule=Host(\"portainer.localhost\")"
+            - "traefik.http.routers.portainer.entrypoints=websecure"
+        networks:
+            - traefik_default
+networks:
+  traefik_default :
+    name: traefik_default
+    external: true
+
 volumes:
     portainer_data:
         external: true

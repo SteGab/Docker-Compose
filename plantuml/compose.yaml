@@ -1,15 +1,14 @@
 name: plantuml
 services:
-    plantumlserver:
+    plantuml:
         container_name: "planuml-server"
         ports:
             - 9003:8080
         image: plantuml/plantuml-server:jetty
         labels:
-            #- "traefik.enable=true"
-            - "traefik.http.routers.plantumlserver.rule=Host('plantuml.localhost')"
-            #- "traefik.http.routers.plantumlserver.entrypoints=web"
-            #- "traefik.http.routers.frontend.service=plantumlserver"
+            - "traefik.enable=true"
+            - "traefik.http.routers.plantuml.rule=Host(\"plantuml.localhost\")"
+            - "traefik.http.routers.plantuml.entrypoints=web"
         networks:
             - traefik_default
 networks:
