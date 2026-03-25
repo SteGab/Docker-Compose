@@ -1,0 +1,13 @@
+name: CommandBox
+services:
+    commandbox:
+        ports:
+            - 8080:8080
+            - 8443:8443
+        environment:
+            - BOX_SERVER_APP_CFENGINE="Lucee@5.2"
+            - ENVIRONMENT=development
+            - LUCEE_ADMIN_ENABLED=true
+        volumes:
+            - ./app:/app
+        image: ortussolutions/commandbox
