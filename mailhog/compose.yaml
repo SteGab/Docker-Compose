@@ -6,4 +6,14 @@ services:
             - 8025:8025 # Mailhog's web UI listens on 8025
         container_name: mailhog
         image: docker.io/mailhog/mailhog
-        
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.mailhog.rule=Host(\"mailhog.localhost\")" # http://mailhog.localhost:8090
+            - "traefik.http.routers.mailhog.entrypoints=web"
+            - "traefik.http.services.mailhog.loadbalancer.server.port=8025" # WICHTIG
+        networks:
+            - traefik_default
+networks:
+  traefik_default :
+    name: traefik_default
+    external: true
