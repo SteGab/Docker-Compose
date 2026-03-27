@@ -3,11 +3,26 @@ services:
     commandbox:
         ports:
             - 8080:8080
-            - 8443:8443
+            #- 8443:8443
         environment:
             - BOX_SERVER_APP_CFENGINE="Lucee@5.2"
             - ENVIRONMENT=development
+            - BOX_SERVER_PROFILE=development
             - LUCEE_ADMIN_ENABLED=true
         volumes:
             - ./app:/app
         image: ortussolutions/commandbox
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.commandbox.rule=Host(\"commandbox1.localhost\")" # http://commandbox1.localhost:8090/
+            - "traefik.http.routers.commandbox.entrypoints=web"
+        networks:
+            - traefik_default
+
+networks:
+  traefik_default:
+    name: traefik_default
+    external: true
+
+# Admin Page: http://commandbox1.localhost:8090/lucee/admin/server.cfm
+# Admin WebUI: http://commandbox1.localhost:8090/lucee/admin/web.cfm
