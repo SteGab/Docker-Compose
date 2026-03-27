@@ -20,7 +20,6 @@ services:
     ports:
       - "8090:8090"
       - "8443:8443"
-      - "8088:8080"
     volumes:
       - "/var/run/podman/podman.sock:/var/run/docker.sock" #Needed for rootfull podman
 

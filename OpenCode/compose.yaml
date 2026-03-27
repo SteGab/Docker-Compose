@@ -1,0 +1,9 @@
+name: OpenCode - Development Container
+services:
+    opencode:
+        stdin_open: true
+        tty: true
+        container_name: opencode
+        volumes:
+            - ./:/home/dev/projects
+        image: localhost/opencode:latest
