@@ -1,0 +1,9 @@
+name: openClaw - Development Container
+services:
+    openclaw:
+        stdin_open: true
+        tty: true
+        container_name: openclaw
+        volumes:
+            - ./:/home/dev/projects
+        image: localhost/openclaw:latest

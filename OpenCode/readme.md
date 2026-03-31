@@ -1,3 +1,6 @@
+# Build Image
+`podman build -t opencode:latest .`
+
 # Run Container
 `podman run --rm --replace -it --name opencode -v ./:/home/dev/projects  localhost/opencode:latest`
 
