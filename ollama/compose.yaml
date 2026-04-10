@@ -2,11 +2,15 @@ services:
   ollama:
     volumes:
       - ollama:/root/.ollama
+      - ./entry.sh:/entry.sh
     container_name: ollama
     pull_policy: always
     tty: true
     restart: unless-stopped
     image: ollama/ollama:latest
+    environment:
+      - OLLAMA_KEEP_ALIVE="24h"
+    entrypoint: ["/bin/bash", "-c", "/entry.sh"]
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:latest
