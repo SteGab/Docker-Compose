@@ -1,42 +1,29 @@
 services:
   ollama:
-    image: ollama/ollama:latest
-    container_name: ollama
-    ports: ["11434:11434"]
     volumes:
-      - ./model_files:/model_files  # Mount the directory with the trained mode
+      - ollama:/root/.ollama
+    container_name: ollama
     pull_policy: always
     tty: true
     restart: unless-stopped
-    #entrypoint: ["/bin/sh", "/model_files/run_ollama.sh"] # Loading the finetuned Mistral with the GGUF file
+    image: ollama/ollama:latest
 
-    # Uncomment below to run on GPU support
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: ${OLLAMA_GPU_DRIVER-nvidia}
-    #           count: ${OLLAMA_GPU_COUNT-1}
-    #           capabilities:
-    #             - gpu
-
-  ollama-webui:
-    image: ghcr.io/ollama-webui/ollama-webui:main
-    container_name: ollama-webui
-    ports: ["3000:8080"]
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
     volumes:
-      - ollama-webui:/app/backend/data
+      - open-webui:/app/backend/data
     depends_on:
       - ollama
+    ports:
+      - 3000:8080
     environment:
-      - 'OLLAMA_API_BASE_URL=http://ollama:11434/api'
-      - ENV=dev
-      - WEBUI_AUTH=False
-      - WEBUI_NAME=OllamaUI
-      - WEBUI_URL=http://localhost:3000
-      - WEBUI_SECRET_KEY=t0p-s3cr3t
+      - 'OLLAMA_BASE_URL=http://ollama:11434'
+      - 'WEBUI_SECRET_KEY='
+    extra_hosts:
+      - host.docker.internal:host-gateway
     restart: unless-stopped
 
 volumes:
   ollama: {}
-  ollama-webui: {}
+  open-webui: {}
