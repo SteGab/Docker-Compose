@@ -11,6 +11,8 @@ services:
     environment:
       - OLLAMA_KEEP_ALIVE="24h"
     entrypoint: ["/bin/bash", "-c", "/entry.sh"]
+    networks:
+        - traefik_default
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:latest
@@ -24,9 +26,21 @@ services:
     environment:
       - 'OLLAMA_BASE_URL=http://ollama:11434'
       - 'WEBUI_SECRET_KEY='
-    extra_hosts:
-      - host.docker.internal:host-gateway
+      - 'WEBUI_AUTH=False'
+    #extra_hosts:
+    #  - host.docker.internal:host-gateway
     restart: unless-stopped
+    labels:
+                - "traefik.enable=true"
+                - "traefik.http.routers.open-webui.rule=Host(\"ollama.localhost\")"
+                - "traefik.http.routers.open-webui.entrypoints=web"
+    networks:
+        - traefik_default
+    
+networks:
+  traefik_default :
+    name: traefik_default
+    external: true    
 
 volumes:
   ollama: {}
