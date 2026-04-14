@@ -1,9 +1,12 @@
 #!/bin/bash
 
-#MODEL_NAME="gemma4:e4b"
+
 #MODEL_NAME="gemma4:26b"
-MODEL_NAME="smollm:360m"
 #MODEL_NAME="qwen3:14b"
+
+MODEL_NAME="smollm:360m"
+#MODEL_NAME="gemma4:e4b"
+#MODEL_NAME="qwen3.5:9b"
 
 
 echo "Starting Ollama server..."
