@@ -2,7 +2,7 @@
 name: traefik
 services:
   traefik:
-    image: "traefik:latest"
+    image: "docker.io/traefik:latest"
     container_name: "traefik"
     restart: unless-stopped
     security_opt:
@@ -22,7 +22,8 @@ services:
       - "8443:8443"
       - "8088:8080" # Traefik dashboard
     volumes:
-      - "/var/run/podman/podman.sock:/var/run/docker.sock" #Needed for rootfull podman
+#      - "/var/run/podman/podman.sock:/var/run/docker.sock" #Needed for rootfull podman
+      - "/run/user/1000/podman/podman.sock:/var/run/docker.sock" #Needed for rootless podman
 
 
 networks:
