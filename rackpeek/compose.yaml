@@ -15,9 +15,9 @@ services:
       retries: 3
     labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.rackpeek.rule=Host(\"rackpeek.localhost\")"
+            - "traefik.http.routers.rackpeek.rule=Host(`rackpeek.localhost`)"
             - "traefik.http.routers.rackpeek.entrypoints=web"
-            - "traefik.http.services.rackpeek.loadBalancer.server.port=9006"
+            - "traefik.http.services.rackpeek.loadBalancer.server.port=8080"
     networks:
             - traefik_default
 networks:
