@@ -1,0 +1,22 @@
+---
+# https://hub.docker.com/r/linuxserver/faster-whisper
+# pip install faster-whisper-cli
+services:
+  faster-whisper:
+    image: lscr.io/linuxserver/faster-whisper:latest
+    container_name: faster-whisper
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      - DEBUG= #optional
+      #- LOCAL_ONLY=false #optional
+      - WHISPER_BEAM=1 #optional
+      - WHISPER_LANG=auto #optional
+      - WHISPER_MODEL=tiny #optional
+    volumes:
+      - ./config:/config
+      - ./data:/data  
+    ports:
+      - 10300:10300
+    restart: unless-stopped
