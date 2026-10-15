@@ -1,6 +1,11 @@
 ---
 # https://hub.docker.com/r/linuxserver/faster-whisper
 # pip install faster-whisper-cli
+#
+# Transkript erstellen:
+# docker exec -it faster-whisper faster-whisper-cli /data/audio.mp3
+# docker exec -it faster-whisper faster-whisper-cli /data/video.mp4
+# Attribut -o output.txt erzeugt eine Textdatei. Default ist .srt.
 services:
   faster-whisper:
     image: lscr.io/linuxserver/faster-whisper:latest
