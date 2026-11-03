@@ -24,4 +24,4 @@ services:
       - ./data:/data  
     ports:
       - 10300:10300
-    restart: unless-stopped
+    restart: no

@@ -6,7 +6,8 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - "/var/run/podman/podman.sock:/var/run/docker.sock" #Needed for rootfull podman
+#      - "/var/run/podman/podman.sock:/var/run/docker.sock" #Needed for rootfull podman
+      - "/run/user/1000/podman/podman.sock:/var/run/docker.sock" # Needed for rootless podman 
       - dockhand_data:/app/data
     labels:
             - "traefik.enable=true"
