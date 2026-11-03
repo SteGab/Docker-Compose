@@ -5,7 +5,7 @@ services:
         tty: true
         container_name: excalidraw
         ports:
-            - 9001:80
+            - 9007:80
         image: excalidraw/excalidraw:latest
         labels:
             - "traefik.enable=true"
