@@ -1,0 +1,21 @@
+services:
+  stackedit:
+    image: benweet/stackedit:latest
+    container_name: stackedit
+    ports:
+      - "9008:8080/tcp"
+    environment:
+      - LISTENING_PORT=8080
+      - ROOT_URL=/
+      - NODE_ENV=production
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.stackedit.rule=Host(\"stackedit.localhost\")"
+      - "traefik.http.routers.stackedit.entrypoints=web"
+    networks:
+      - traefik_default
+networks:
+  traefik_default :
+    name: traefik_default
+    external: true
